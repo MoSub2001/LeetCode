@@ -142,3 +142,72 @@ var permute = function(nums) {
 
 // **Example Usage**
 console.log(findMinimumTime([2,5,4],2));
+
+
+ class DoubleNode{
+    constructor(key ,value){
+        this.key= key
+        this.value= value
+        this.next = null;
+        this.prev = null;
+    }
+ }
+
+
+ 
+var LRUCache = function(capacity) {
+this.capacity = capacity;
+this.cache = new Map();
+this.head = new DoubleNode(null ,null)
+this.tail= new DoubleNode(null , null)
+this.head.next = this.tail
+this.tail.prev= head
+
+LRUCache.prototype.put = function(key, value) {
+    if (this.cache.has(key)){// update the key and it should be the tail now
+        this.removeNode(this.cache.get(key))
+        addToTail(newNode)
+        this.cache.set(key,newNode)
+    }
+    else{
+        let newNode = new DoubleNode(key,value)
+        if(this.capacity===0){
+            removeNode(this.head.next)
+            this.cache.delete(this.head.next.key)
+            addToTail(newNode);
+        }
+        else{
+            addToTail(newNode)
+            this.cache.set(key,newNode)
+            this.capacity--;
+            }
+
+    }
+}
+
+LRUCache.prototype.get= function(key){
+    if (this.cache.has(key)){
+        tempNode = this.cache.get(key)
+        this.removeNode(tempNode)
+        this.addToTail(tempNode)
+        return tempNode.value
+    }
+    else return -1;
+}
+
+
+LRUCache.prototype.addToTail = function(node) {
+this.tail.prev.next=node;
+node.prev=this.tail.prev;
+this.tail.prev=node;
+node.next=this.tail;
+}
+
+LRUCache.prototype.removeNode = function(node) {
+node.prev.next = node.next
+node.next.prev = node.prev
+};
+
+
+
+};
